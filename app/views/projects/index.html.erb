@@ -1,0 +1,27 @@
+<table>
+  <tr>
+    <td>Title</td>
+    <td>Description</td>
+    <td>Action</td>
+  </tr>
+  <% @projects.each do |project| %>
+    <tr>
+      <td>
+        <h5><%= link_to project.title, project %></h5>
+      </td>
+      <td> 
+        <%= project.description %>
+      </td>
+      <td>
+        <%= link_to edit_project_path(project) do %>
+          <i class="Small material-icons">edit</i>
+        <% end %>
+        <%= link_to project_path(project), method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="Small material-icons">delete</i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "New project", new_project_path%>
