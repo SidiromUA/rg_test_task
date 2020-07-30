@@ -1,19 +1,21 @@
 class ProjectsController < ApplicationController
   before_action :find_project, only: [:show, :edit, :update, :destroy]
   def index
-    @projects = Project.all.order("created_at DESC")
+    if user_signed_in?
+      @projects = Project.where(:user_id => current_user.id)
+              .order(id: :desc).paginate(page: params[:page], per_page: 10)
+    end
   end
 
   def show
-    
   end
 
   def new
-    @project = Project.new
+    @project = current_user.projects.build
   end
 
   def create
-    @project = Project.new(project_params)
+    @project = current_user.projects.build(project_params)
     if @project.save
       redirect_to root_path
     else
@@ -33,6 +35,12 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
+    redirect_to root_path
+  end
+
+  def complete 
+    @project = Project.find(params[:id]) 
+    @project.update_attribute(:completed_at, Time.now) 
     redirect_to root_path
   end
 
