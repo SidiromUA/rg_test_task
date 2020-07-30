@@ -2,12 +2,13 @@ class ProjectsController < ApplicationController
   before_action :find_project, only: [:show, :edit, :update, :destroy]
   def index
     if user_signed_in?
-      @projects = Project.where(:user_id => current_user.id)
-              .order(id: :desc).paginate(page: params[:page], per_page: 10)
+      @projects = Project.where(user_id: current_user.id)
+                         .order(id: :desc).paginate(page: params[:page], per_page: 3)
     end
   end
 
   def show
+    @tasks = @project.tasks.paginate(page: params[:page], per_page: 3)
   end
 
   def new
@@ -38,16 +39,10 @@ class ProjectsController < ApplicationController
     redirect_to root_path
   end
 
-  def complete 
-    @project = Project.find(params[:id]) 
-    @project.update_attribute(:completed_at, Time.now) 
-    redirect_to root_path
-  end
-
   private
 
   def project_params
-    params.require(:project).permit(:title, :description)
+    params.require(:project).permit(:name)
   end
 
   def find_project

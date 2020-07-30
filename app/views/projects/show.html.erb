@@ -1,8 +1,11 @@
+<center><%= link_to "New Task", new_project_task_path(@project), class: "navbar-text navbar-link navbar-right" %></center>
 <div class="col-md-6 col-md-offset-3">
-  <h2><%= @project.title %></h2>
-  <p><%= @project.description %></p>
+
+  <h2><%= @project.name %></h2>
 
   <%= link_to "Back", root_path %> 
   <%= link_to "Edit", edit_project_path(@project) %> 
   <%= link_to "Delete", project_path(@project), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+  <%= render partial: "/tasks/table", locals: {tasks: @tasks, project: @project} %>
 </div>

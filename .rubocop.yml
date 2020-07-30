@@ -1,25 +1,31 @@
 AllCops:
+  TargetRubyVersion: 2.5
+  DisplayCopNames: true
   Exclude:
-    - db/**/*
-    - test/**/*
-    - config/**/*
-    - bin/**/*
-    - Gemfile
-    - config.ru
-    - Rakefile
+    - 'test/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'Gemfile'
+    - 'bin/*'
+    - 'node_modules/**/**/**/**/*'
 
 Style/Documentation:
   Enabled: false
 
-# Customize rules
-Metrics/LineLength:
-  Max: 95
+Style/FrozenStringLiteralComment:
+  Enabled: false
 
-MethodLength:
-  Max: 35
+Style/SymbolArray:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 200
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/features/**/*'
+  ExcludedMethods: ['describe', 'context']
+  Max: 40
 
 Metrics/AbcSize:
-   Enabled: false
-
-BlockLength:
-  Max: 70
+  Max: 17

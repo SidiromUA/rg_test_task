@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :projects do 
-    member do
-      patch :complete
-    end
+  resources :projects do
+    resources :tasks, except: %i[index show] 
   end
   root 'projects#index'
 end

@@ -1,18 +1,11 @@
 <% if user_signed_in? %>
 	<div class="col-md-6 col-md-offset-3">
 		<% @projects.each do |project| %>
-			<div class="index-wrapper">
-				<% if project.completed? %>
+			<div class="index-wrapper">	
 					<div class="row projects">
 						<div class="col-md-8">
-							<h2 style="opacity: 0.5;" class="project-title"><strike><%= link_to project.title, project %></strike></h2>
-							<p style="opacity: 0.5;" class="project-sub-title projects-desc"><%= project.description %></p>
-							<p style="opacity: 0.5;" class="project-created-at project-sub-title">Completed <%= time_ago_in_words(project.completed_at) %> ago</p>
-						</div>
-						<div class="col-md-2">
-							<p><%= link_to complete_project_path(project), method: :patch do %></p>
-								<i class="fa fa-check fa-lg"></i>
-							<% end %>
+							<h2 class="project-name"><%= link_to project.name, project %></h2>
+							<p style="opacity: 0.5;" class="time-created-at projects-sub-name">Created <%= time_ago_in_words(project.created_at) %> ago</p>
 						</div>
 						<div class="col-md-2">
 							<p><%= link_to project, method: :delete, data: { confirm: "Are you sure?" } do %></p>
@@ -21,27 +14,8 @@
               <p><%= link_to edit_project_path(project) do %></p>
 								<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 							<% end %>
-						</div>	
-					</div>
-				<% else %>	
-					<div class="row projects">
-						<div class="col-md-8">
-							<h2 class="project-title"><%= link_to project.title, project %></h2>
-							<p class="project-sub-title project-desc"><%= project.description %></p>
-							<p style="opacity: 0.5;" class="time-created-at projects-sub-title">Created <%= time_ago_in_words(project.created_at) %> ago</p>
-						</div>
-						<div class="col-md-2">
-							<p><%= link_to complete_project_path(project), method: :patch do %></p>
-								<i class="fa fa-check fa-lg"></i>
-							<% end %>
-						</div>
-						<div class="col-md-2">
-							<p><%= link_to project, method: :delete, data: { confirm: "Are you sure?" } do %></p>
-								<i class="fa fa-trash fa-lg"></i>
-							<% end %>
 						</div>
 					</div>
-				<% end %>
 			</div>
 
 		<% end %>	

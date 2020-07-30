@@ -1,24 +1,28 @@
-# README
+# rg_test_task
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Setup
 
-Things you may want to cover:
+App requires [Ruby](https://www.ruby-lang.org/en/) v2.6.3 to run.
 
-* Ruby version
+Install the dependencies and start the server.
 
-* System dependencies
+```sh
+$ git git@github.com:SidiromUA/rg_test_task.git
+$ cd rg_test_task
+$ rvm use ruby-2.6.3
+# If you do not have installed this version of ruby please install it.
+$ rvm install 2.6.3 # or $ rvm install ruby-2.6.3
+$ bundle
+```
 
-* Configuration
+```sh
+$ rails db:setup
+```
 
-* Database creation
+```sh
+$ rails db:seed
+```
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```sh
+$ rails s
+```
