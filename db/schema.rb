@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_07_30_165251) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_07_30_165251) do
   create_table "tasks", force: :cascade do |t|
     t.string "name"
     t.integer "status"
-    t.integer "project_id", null: false
+    t.bigint "project_id", null: false
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end
 
